@@ -1,0 +1,5 @@
+# The core scripts use only the Python standard library.
+# External runtime tools:
+# - Node.js 20+
+# - lark-cli from npm package @larksuite/cli
+# - @larksuite/whiteboard-cli via npx

@@ -1,0 +1,40 @@
+{
+  "series": [
+    {
+      "sample": "XN1",
+      "label": "细泥1",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN1-1-2032-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN2",
+      "label": "细泥2",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN2-1-2042-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN3",
+      "label": "细泥3",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN3-1-2053-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN4",
+      "label": "细泥4",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN4-1-2102-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN5",
+      "label": "细泥5",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN5-1-2112-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN6",
+      "label": "细泥6",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN6-1-2123-1_Theta_2-Theta.txt"
+    },
+    {
+      "sample": "XN7",
+      "label": "细泥7",
+      "path": "D:\\Project\\一图流汇报——XRD\\脱泥实验的xrd\\XN7-1-2132-1_Theta_2-Theta.txt"
+    }
+  ],
+  "svg": "diagrams\\2026-06-12T-xrd-skill-test\\diagram.svg"
+}

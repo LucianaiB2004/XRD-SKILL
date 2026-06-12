@@ -1,0 +1,4 @@
+interface:
+  display_name: "XRD Onepage Whiteboard"
+  short_description: "Generate XRD charts and publish Feishu whiteboards"
+  default_prompt: "Use $xrd-onepage-whiteboard to turn XRD raw data into a chart and publish it as an editable Feishu whiteboard."
