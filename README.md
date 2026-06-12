@@ -1,53 +1,53 @@
 # XRD-SKILL
 
-XRD-SKILL is a GPT/Codex-ready project for turning raw XRD two-column data into a publication-style one-page XRD chart, then publishing that chart as an editable Feishu/Lark whiteboard.
+XRD-SKILL 是一个面向 GPT / Codex 的 XRD 一图流项目：它可以把原始 XRD 二维数据自动绘制成一张堆叠谱线图，并进一步发布为可编辑的飞书 / Lark 画板。
 
-The project packages the verified workflow from this repository:
+这个项目封装了已经验证通过的完整链路：
 
-1. Raw XRD data to `diagram.svg`, `diagram.png`, and Feishu OpenAPI `diagram.json`.
-2. `diagram.svg` or `diagram.json` to an editable Feishu whiteboard block.
+1. XRD 原始数据生成 `diagram.svg`、`diagram.png` 和飞书画板 OpenAPI 节点文件 `diagram.json`。
+2. 将 `diagram.svg` 或 `diagram.json` 写入飞书文档中的可编辑画板块。
 
-## What It Solves
+## 项目能做什么
 
-Traditional XRD plotting is usually manual: import data, style stacked curves, add phase markers, export an image, then paste the result into a report. This project turns that into a repeatable GPT workflow:
+传统 XRD 作图通常需要手动导入数据、叠放曲线、添加物相标记、导出图片，再粘贴到汇报文档里。XRD-SKILL 把这套流程变成可重复执行的 GPT 工作流：
 
-- read XRD exports from a folder;
-- stack and style multiple sample curves;
-- add phase markers for `Fe2SiO4` and `Fe2O3`;
-- render and check the chart with `@larksuite/whiteboard-cli`;
-- write the chart into Feishu as editable whiteboard nodes, not a flat screenshot.
+- 从文件夹中读取 XRD 导出的二维数据；
+- 自动绘制多条样品谱线的堆叠图；
+- 添加 `Fe2SiO4` 和 `Fe2O3` 等物相峰位标记；
+- 使用 `@larksuite/whiteboard-cli` 渲染并检查图形；
+- 将结果写入飞书画板，生成可编辑节点，而不是一张不可编辑截图。
 
-## Repository Layout
+## 项目结构
 
 ```text
 XRD-SKILL/
-├── skill/xrd-onepage-whiteboard/      # Codex skill package
-│   ├── SKILL.md                       # Skill trigger and workflow instructions
-│   ├── agents/openai.yaml             # UI metadata for Codex/OpenAI skill loading
+├── skill/xrd-onepage-whiteboard/      # Codex Skill 包
+│   ├── SKILL.md                       # Skill 触发说明和工作流
+│   ├── agents/openai.yaml             # Codex/OpenAI Skill UI 元数据
 │   └── scripts/
-│       ├── xrd_data_to_chart.py       # Raw data -> SVG/PNG/OpenAPI
-│       └── publish_xrd_whiteboard.py  # SVG/OpenAPI -> Feishu whiteboard
+│       ├── xrd_data_to_chart.py       # XRD 原始数据 -> SVG/PNG/OpenAPI
+│       └── publish_xrd_whiteboard.py  # SVG/OpenAPI -> 飞书画板
 ├── examples/
-│   ├── sample-data/                   # Example XRD txt data
-│   ├── sample-output/                 # Example generated chart and Feishu preview
-│   ├── reference-xrd.tif              # Original reference figure
-│   └── reference-xrd-preview.png      # Preview of the reference figure
+│   ├── sample-data/                   # 示例 XRD txt 数据
+│   ├── sample-output/                 # 示例生成图和飞书预览
+│   ├── reference-xrd.tif              # 原始参考效果图
+│   └── reference-xrd-preview.png      # 参考效果图预览
 ├── docs/
-│   ├── USAGE.md
-│   └── CUSTOM_GPT_SETUP.md
-├── GPT_INSTRUCTIONS.md                # Instructions for a GPT project/custom GPT
-├── AGENTS.md                          # Agent operating guidance
+│   ├── USAGE.md                       # 详细使用说明
+│   └── CUSTOM_GPT_SETUP.md            # GPT 项目/自定义 GPT 配置说明
+├── GPT_INSTRUCTIONS.md                # 给 GPT 项目使用的指令
+├── AGENTS.md                          # Agent 维护规则
 └── README.md
 ```
 
-## Requirements
+## 环境要求
 
-- Python 3.10 or newer.
-- Node.js 20 or newer.
-- `lark-cli` from `@larksuite/cli`, authenticated for Feishu/Lark.
-- `@larksuite/whiteboard-cli`, invoked through `npx`.
+- Python 3.10 或更高版本；
+- Node.js 20 或更高版本；
+- 已安装并完成认证的 `lark-cli`；
+- 可通过 `npx` 调用的 `@larksuite/whiteboard-cli`。
 
-Quick checks:
+快速检查：
 
 ```powershell
 python --version
@@ -56,9 +56,9 @@ lark-cli auth status
 npx -y @larksuite/whiteboard-cli@^0.2.11 -v
 ```
 
-## Quick Start
+## 快速开始
 
-Generate a chart from the bundled sample data:
+使用仓库内置示例数据生成 XRD 一图流：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
@@ -67,7 +67,16 @@ python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
   --render --check --openapi
 ```
 
-Publish it to an existing Feishu whiteboard:
+生成结果包括：
+
+- `runs/sample/diagram.svg`：可转换为飞书画板节点的 SVG 源文件；
+- `runs/sample/diagram.png`：本地渲染预览图；
+- `runs/sample/diagram.json`：飞书 OpenAPI 画板节点；
+- `runs/sample/metadata.json`：输入数据和输出文件记录。
+
+## 发布到飞书画板
+
+覆盖写入已有飞书画板：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
@@ -76,7 +85,7 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
   --preview-output ".\runs\sample\live"
 ```
 
-Append a new whiteboard block to a Feishu doc/wiki page:
+追加一个新画板块到飞书文档或 Wiki 页面：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
@@ -86,36 +95,83 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
   --preview-output ".\runs\sample\live"
 ```
 
-## Using As A Codex Skill
+发布脚本会导出飞书端实时预览图，用于确认写入后的布局是否正确。
 
-Copy or symlink `skill/xrd-onepage-whiteboard` into your Codex skills directory:
+## 作为 Codex Skill 使用
+
+将 `skill/xrd-onepage-whiteboard` 复制到 Codex 的 skills 目录：
 
 ```powershell
 Copy-Item ".\skill\xrd-onepage-whiteboard" "$env:USERPROFILE\.codex\skills\xrd-onepage-whiteboard" -Recurse -Force
 ```
 
-Restart Codex, then ask:
+重启 Codex 后，可以直接这样调用：
 
 ```text
-Use $xrd-onepage-whiteboard to turn the XRD files in ./examples/sample-data into a chart and publish it to this Feishu document: <doc URL>
+使用 $xrd-onepage-whiteboard，把 ./examples/sample-data 里的 XRD 数据生成一图流，并发布到这个飞书文档：<文档链接>
 ```
 
-## Example Output
+## 作为 GPT 项目使用
 
-Local rendered chart:
+如果要包装成自定义 GPT 或 GPT 项目，建议把以下文件加入项目知识：
 
-![Generated XRD chart](examples/sample-output/diagram.png)
+- `README.md`
+- `GPT_INSTRUCTIONS.md`
+- `docs/USAGE.md`
+- `docs/CUSTOM_GPT_SETUP.md`
+- `skill/xrd-onepage-whiteboard/SKILL.md`
 
-Feishu live preview:
+运行环境中保留这两个脚本，供 GPT / Agent 调用：
 
-![Feishu live preview](examples/sample-output/feishu-live-preview.png)
+- `skill/xrd-onepage-whiteboard/scripts/xrd_data_to_chart.py`
+- `skill/xrd-onepage-whiteboard/scripts/publish_xrd_whiteboard.py`
 
-## Notes
+## 示例输出
 
-- The default file pattern is `XN*_Theta_2-Theta.txt`, matching the current fine-slime sample naming convention.
-- The default phase markers are tuned for the supplied data and can be changed with `--black-peaks` and `--red-peaks`.
-- `publish_xrd_whiteboard.py` uses overwrite mode when updating an existing whiteboard so accidental manual edits can be restored from generated source.
+本地生成的 XRD 图：
 
-## License
+![生成的 XRD 图](examples/sample-output/diagram.png)
 
-MIT. See [LICENSE](LICENSE).
+飞书端导出的画板预览：
+
+![飞书画板预览](examples/sample-output/feishu-live-preview.png)
+
+## 常用参数
+
+默认文件匹配规则：
+
+```text
+XN*_Theta_2-Theta.txt
+```
+
+默认样品标签：
+
+```text
+XN1 -> 细泥1
+XN2 -> 细泥2
+...
+```
+
+可通过参数调整物相峰位：
+
+```powershell
+--black-peaks "30.2,35.6,43.3,48.6,57.4,62.7"
+--red-peaks "20.6,38.8,54.1"
+```
+
+如果不需要物相标记：
+
+```powershell
+--no-markers
+```
+
+## 注意事项
+
+- 默认只读取 `XN*_Theta_2-Theta.txt`，因此不会把 `tuonijingkuang` 参考样误放进图里。
+- 如果换了数据集，应先确认文件名规则和峰位标记是否需要调整。
+- `publish_xrd_whiteboard.py` 覆盖已有画板时会使用 overwrite 模式，适合恢复被误移动或误编辑的画板。
+- 每次发布后都应查看飞书端导出的 `live.png`，因为本地检查不能覆盖所有视觉碰撞问题。
+
+## 许可证
+
+本项目使用 MIT License。详见 [LICENSE](LICENSE)。
