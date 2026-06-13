@@ -23,6 +23,14 @@
 
 如果你通过 OpenClaw、QClaw、KimiClaw、JVSClaw、WorkBuddy、ArkClaw，或只通过 GitHub 获取本项目，请先阅读本 README 和 `docs/USAGE.md`。本项目已经内置示例数据、可运行脚本和安装检查入口，克隆后可以直接验证完整链路。
 
+## 效果预览
+
+| 本地生成的 XRD 图 | 飞书可编辑画板预览 |
+| --- | --- |
+| ![生成的 XRD 图](examples/sample-output/diagram.png) | ![飞书画板预览](examples/sample-output/feishu-live-preview.png) |
+
+在线飞书文档：[XRD 一图流画板](https://lucianaib.feishu.cn/wiki/FNfkwYYe4i033qkMgN8cYSOUnRf)
+
 ## 项目能做什么
 
 XRD-SKILL 是一个面向 GPT / Codex 的 XRD 一图流项目。它把传统的手动作图流程拆成两项可复用技能：
@@ -160,16 +168,6 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
 2. `python ".\scripts\install_codex_skill.py" --force`
 3. `python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" --data-dir ".\examples\sample-data" --output-dir ".\runs\sample" --render --check --openapi`
 4. 如果需要飞书发布，再运行 `python ".\scripts\preflight.py"` 并使用 `publish_xrd_whiteboard.py` 发布到目标文档或画板。
-
-## 示例输出
-
-本地生成的 XRD 图：
-
-![生成的 XRD 图](examples/sample-output/diagram.png)
-
-飞书端导出的画板预览：
-
-![飞书画板预览](examples/sample-output/feishu-live-preview.png)
 
 ## 常用参数
 
