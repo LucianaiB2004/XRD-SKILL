@@ -4,6 +4,8 @@ XRD-SKILL packages the full chain from raw XRD data to editable Feishu whiteboar
 
 - `xrd_data_to_chart.py` generates the chart artifacts.
 - `publish_xrd_whiteboard.py` publishes or restores Feishu whiteboards.
+- `scripts/preflight.py` checks Python, Node.js, whiteboard-cli, and optional Feishu CLI auth.
+- `scripts/install_codex_skill.py` installs the packaged skill into the local Codex skills directory.
 - `skill/xrd-onepage-whiteboard` can be installed as a Codex skill.
 - `GPT_INSTRUCTIONS.md` can be used as a Custom GPT or GPT project instruction file.
 

@@ -13,6 +13,10 @@ This repository is a GPT/Codex project for XRD one-page chart generation and Fei
 ## Validation Commands
 
 ```powershell
+python ".\scripts\preflight.py" --skip-lark
+
+python ".\scripts\install_codex_skill.py" --dest ".\runs\skill-install-test" --force
+
 python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
   --data-dir ".\examples\sample-data" `
   --output-dir ".\runs\sample" `
@@ -22,8 +26,7 @@ python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
 Publishing requires authenticated Feishu CLI and a target document or whiteboard token:
 
 ```powershell
-lark-cli auth status
-npx -y @larksuite/whiteboard-cli@^0.2.11 -v
+python ".\scripts\preflight.py"
 ```
 
 ## Files To Preserve

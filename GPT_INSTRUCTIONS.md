@@ -13,7 +13,8 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
 ## Workflow
 
 1. Identify the data folder and file pattern.
-2. Generate `diagram.svg`, `diagram.png`, and `diagram.json`:
+2. Run `python ".\scripts\preflight.py" --skip-lark` before local chart generation. For Feishu publishing tasks, run `python ".\scripts\preflight.py"` when the environment is expected to have `lark-cli` authentication.
+3. Generate `diagram.svg`, `diagram.png`, and `diagram.json`:
 
    ```powershell
    python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
@@ -22,8 +23,8 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
      --render --check --openapi
    ```
 
-3. Inspect `diagram.png` visually.
-4. Publish to Feishu:
+4. Inspect `diagram.png` visually.
+5. Publish to Feishu:
 
    ```powershell
    python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
@@ -32,8 +33,8 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
      --preview-output ".\runs\<RUN_NAME>\live"
    ```
 
-5. Inspect the exported live preview image.
-6. Return the Feishu document/whiteboard link and preview path.
+6. Inspect the exported live preview image.
+7. Return the Feishu document/whiteboard link and preview path.
 
 ## Default Assumptions
 

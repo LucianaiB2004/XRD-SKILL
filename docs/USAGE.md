@@ -1,10 +1,51 @@
-# Usage
+# 使用说明
 
-This guide describes the two supported workflows.
+本文档说明 XRD-SKILL 的两条核心链路：
 
-## 1. Raw XRD Data To Chart
+1. 从原始 XRD 二维数据生成 XRD 一图流；
+2. 将生成的 XRD 图发布为飞书 / Lark 可编辑画板。
 
-Input files should be text files with two numeric columns:
+## 0. 环境检查
+
+只检查本地作图所需环境：
+
+```powershell
+python ".\scripts\preflight.py" --skip-lark
+```
+
+检查完整飞书发布环境：
+
+```powershell
+python ".\scripts\preflight.py"
+```
+
+完整发布环境需要：
+
+- Python 3.10+；
+- Node.js 20+；
+- 可通过 `npx` 调用 `@larksuite/whiteboard-cli`；
+- 已安装并登录的 `lark-cli`。
+
+## 1. 安装为 Codex Skill
+
+```powershell
+python ".\scripts\install_codex_skill.py" --force
+```
+
+脚本会把 `skill/xrd-onepage-whiteboard` 复制到本机 Codex skills 目录：
+
+- 如果设置了 `CODEX_HOME`，安装到 `%CODEX_HOME%\skills\xrd-onepage-whiteboard`；
+- 否则安装到 `%USERPROFILE%\.codex\skills\xrd-onepage-whiteboard`。
+
+安装后重启 Codex，即可直接触发：
+
+```text
+使用 $xrd-onepage-whiteboard，把 ./examples/sample-data 生成 XRD 一图流。
+```
+
+## 2. 原始 XRD 数据生成图
+
+输入文件应为两列数值文本，第一列为 `2θ`，第二列为强度：
 
 ```text
 SampleName
@@ -13,7 +54,7 @@ SampleName
 ...
 ```
 
-Run:
+使用仓库内置示例数据运行：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
@@ -22,14 +63,14 @@ python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
   --render --check --openapi
 ```
 
-Outputs:
+输出文件：
 
-- `diagram.svg`: editable SVG source for the whiteboard converter.
-- `diagram.png`: local rendered preview.
-- `diagram.json`: Feishu OpenAPI whiteboard node JSON.
-- `metadata.json`: list of input series and generated artifact paths.
+- `diagram.svg`：可被白板转换器读取的 SVG 源文件；
+- `diagram.png`：本地渲染预览图；
+- `diagram.json`：飞书 OpenAPI 画板节点 JSON；
+- `metadata.json`：输入序列和生成文件记录。
 
-Useful options:
+常用参数：
 
 ```powershell
 --pattern "*_Theta_2-Theta.txt"
@@ -39,9 +80,9 @@ Useful options:
 --no-markers
 ```
 
-## 2. Chart To Feishu Whiteboard
+## 3. XRD 图发布到飞书画板
 
-Publish to an existing whiteboard token:
+发布到已有画板 token，会覆盖该画板的当前内容，适合修复被误移动或误编辑的生成图：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
@@ -50,20 +91,31 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
   --preview-output ".\runs\sample\live"
 ```
 
-Append a new whiteboard block to a document:
+追加一个新画板块到飞书文档或 Wiki 页面：
 
 ```powershell
 python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
   --doc "https://your-domain.feishu.cn/wiki/..." `
-  --svg ".\runs\sample\diagram.svg" `
+  --openapi-json ".\runs\sample\diagram.json" `
   --title "XRD 一图流画板" `
   --preview-output ".\runs\sample\live"
 ```
 
-The script returns JSON containing the whiteboard token, block ID when a new block is created, and preview image path.
+脚本会返回包含 `whiteboard_token`、新建块 `block_id` 和预览图路径的 JSON。
 
-## Troubleshooting
+## 4. 验证标准
 
-- If `npx` cannot be found from Python on Windows, ensure Node.js is installed and `npx.cmd` is on PATH.
-- If Feishu returns a permission error, run `lark-cli auth status` and refresh authorization scopes.
-- If `whiteboard-cli --check` reports text overflow, adjust labels, chart width, or phase markers before publishing.
+一次完整验证应确认：
+
+- `preflight.py --skip-lark` 通过；
+- `install_codex_skill.py --force` 能成功复制 skill；
+- `xrd_data_to_chart.py --render --check --openapi` 能生成 SVG、PNG、JSON；
+- 如果发布到飞书，`publish_xrd_whiteboard.py` 返回 `"ok": true`；
+- 发布后查看导出的 `live.png`，确认飞书端画板布局正常。
+
+## 5. 常见问题
+
+- 如果 Python 找不到 `npx`，请确认 Node.js 已安装，并且 `npx.cmd` 在 PATH 中。
+- 如果 `whiteboard-cli --check` 报告文字溢出，先调整标签、画布宽度或峰位标记，再发布。
+- 如果飞书返回权限错误，先运行 `lark-cli auth status`，必要时重新登录或补充授权范围。
+- 如果只想验证本地 XRD 图生成，不需要登录飞书，运行 `python ".\scripts\preflight.py" --skip-lark`。

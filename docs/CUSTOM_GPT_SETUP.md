@@ -17,10 +17,13 @@ Add these files to the GPT/project knowledge:
 - `README.md`
 - `GPT_INSTRUCTIONS.md`
 - `docs/USAGE.md`
+- `docs/CUSTOM_GPT_SETUP.md`
 - `skill/xrd-onepage-whiteboard/SKILL.md`
 
 Keep the scripts in the project workspace so the agent can execute them:
 
+- `scripts/preflight.py`
+- `scripts/install_codex_skill.py`
 - `skill/xrd-onepage-whiteboard/scripts/xrd_data_to_chart.py`
 - `skill/xrd-onepage-whiteboard/scripts/publish_xrd_whiteboard.py`
 
@@ -46,3 +49,15 @@ The GPT runner or local agent environment must have:
 - Node.js 20+
 - `lark-cli` authenticated as the target Feishu/Lark user
 - network access to install or run `@larksuite/whiteboard-cli` through `npx`
+
+Before a real run, ask the agent to execute:
+
+```powershell
+python ".\scripts\preflight.py" --skip-lark
+```
+
+For Feishu publishing tasks, ask the agent to execute the full check:
+
+```powershell
+python ".\scripts\preflight.py"
+```
