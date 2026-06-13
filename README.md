@@ -15,6 +15,10 @@
 
 > ✅ **Verified:** 已验证可从示例 XRD 数据生成 `diagram.svg`、`diagram.png`、`diagram.json`，并成功发布为飞书可编辑画板。
 
+<p align="center">
+  <img src="./封面.png" alt="XRD-SKILL 项目封面" width="100%">
+</p>
+
 ---
 
 如果你通过 OpenClaw、QClaw、KimiClaw、JVSClaw、WorkBuddy、ArkClaw，或只通过 GitHub 获取本项目，请先阅读本 README 和 `docs/USAGE.md`。本项目已经内置示例数据、可运行脚本和安装检查入口，克隆后可以直接验证完整链路。
