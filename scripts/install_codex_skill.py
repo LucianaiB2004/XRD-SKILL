@@ -45,9 +45,13 @@ def ensure_safe_remove(dest_root: Path, dest: Path) -> None:
 
 def main() -> int:
     args = parse_args()
-    source = repo_root() / "skill" / SKILL_NAME
-    if not source.is_dir():
-        print(f"Skill source not found: {source}", file=sys.stderr)
+    source = repo_root()
+    required = [source / "SKILL.md", source / "scripts"]
+    missing = [path for path in required if not path.exists()]
+    if missing:
+        print("Skill source is incomplete:", file=sys.stderr)
+        for path in missing:
+            print(f"- {path}", file=sys.stderr)
         return 2
 
     dest_root = Path(args.dest).expanduser() if args.dest else default_dest_root()
@@ -62,7 +66,12 @@ def main() -> int:
         ensure_safe_remove(dest_root, dest)
         shutil.rmtree(dest)
 
-    shutil.copytree(source, dest)
+    dest.mkdir(parents=True)
+    shutil.copy2(source / "SKILL.md", dest / "SKILL.md")
+    for directory_name in ("agents", "scripts"):
+        directory = source / directory_name
+        if directory.exists():
+            shutil.copytree(directory, dest / directory_name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     print(f"Installed {SKILL_NAME} to {dest}")
     print("Restart Codex to refresh the available skills list.")
     return 0

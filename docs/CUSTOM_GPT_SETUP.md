@@ -18,14 +18,14 @@ Add these files to the GPT/project knowledge:
 - `GPT_INSTRUCTIONS.md`
 - `docs/USAGE.md`
 - `docs/CUSTOM_GPT_SETUP.md`
-- `skill/xrd-onepage-whiteboard/SKILL.md`
+- `SKILL.md`
 
 Keep the scripts in the project workspace so the agent can execute them:
 
 - `scripts/preflight.py`
 - `scripts/install_codex_skill.py`
-- `skill/xrd-onepage-whiteboard/scripts/xrd_data_to_chart.py`
-- `skill/xrd-onepage-whiteboard/scripts/publish_xrd_whiteboard.py`
+- `scripts/xrd_data_to_chart.py`
+- `scripts/publish_xrd_whiteboard.py`
 
 ## Starter Prompts
 

@@ -36,7 +36,7 @@ Use `--as user` by default for user-owned docs/wiki pages. If `lark-cli` asks fo
 Run from the project/workspace root so relative output paths are stable:
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
+python ".\scripts\xrd_data_to_chart.py" `
   --data-dir ".\examples\sample-data" `
   --output-dir ".\runs\xrd-run" `
   --render --check --openapi
@@ -52,7 +52,7 @@ Defaults are tuned for the current XRD one-page style:
 For a different dataset, change only the pattern and peak lists:
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
+python ".\scripts\xrd_data_to_chart.py" `
   --data-dir ".\data" `
   --pattern "*_Theta_2-Theta.txt" `
   --black-peaks "30.2,35.6,43.3,48.6,57.4,62.7" `
@@ -67,7 +67,7 @@ Always view `diagram.png` after generation. `whiteboard-cli --check` catches man
 Overwrite an existing whiteboard:
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
+python ".\scripts\publish_xrd_whiteboard.py" `
   --whiteboard-token "<WHITEBOARD_TOKEN>" `
   --openapi-json ".\runs\xrd-run\diagram.json" `
   --preview-output ".\runs\xrd-run\live"
@@ -76,7 +76,7 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
 Append a new whiteboard block to a doc/wiki page:
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
+python ".\scripts\publish_xrd_whiteboard.py" `
   --doc "https://example.feishu.cn/wiki/..." `
   --svg ".\runs\xrd-run\diagram.svg" `
   --title "XRD 一图流画板" `

@@ -32,7 +32,7 @@ python ".\scripts\preflight.py"
 python ".\scripts\install_codex_skill.py" --force
 ```
 
-脚本会把 `skill/xrd-onepage-whiteboard` 复制到本机 Codex skills 目录：
+脚本会把当前项目根目录中的 `SKILL.md`、`agents/` 和 `scripts/` 安装到本机 Codex skills 目录：
 
 - 如果设置了 `CODEX_HOME`，安装到 `%CODEX_HOME%\skills\xrd-onepage-whiteboard`；
 - 否则安装到 `%USERPROFILE%\.codex\skills\xrd-onepage-whiteboard`。
@@ -57,7 +57,7 @@ SampleName
 使用仓库内置示例数据运行：
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
+python ".\scripts\xrd_data_to_chart.py" `
   --data-dir ".\examples\sample-data" `
   --output-dir ".\runs\sample" `
   --render --check --openapi
@@ -85,7 +85,7 @@ python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
 发布到已有画板 token，会覆盖该画板的当前内容，适合修复被误移动或误编辑的生成图：
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
+python ".\scripts\publish_xrd_whiteboard.py" `
   --whiteboard-token "<WHITEBOARD_TOKEN>" `
   --openapi-json ".\runs\sample\diagram.json" `
   --preview-output ".\runs\sample\live"
@@ -94,7 +94,7 @@ python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
 追加一个新画板块到飞书文档或 Wiki 页面：
 
 ```powershell
-python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
+python ".\scripts\publish_xrd_whiteboard.py" `
   --doc "https://your-domain.feishu.cn/wiki/..." `
   --openapi-json ".\runs\sample\diagram.json" `
   --title "XRD 一图流画板" `

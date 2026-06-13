@@ -4,7 +4,7 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
 
 ## Core Behavior
 
-- Prefer deterministic scripts in `skill/xrd-onepage-whiteboard/scripts/` over rewriting plotting logic.
+- Prefer deterministic scripts in `scripts/` over rewriting plotting logic.
 - Treat `xrd_data_to_chart.py` as the source of truth for raw data to chart generation.
 - Treat `publish_xrd_whiteboard.py` as the source of truth for Feishu whiteboard publishing.
 - Always validate local rendering before publishing to Feishu.
@@ -17,7 +17,7 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
 3. Generate `diagram.svg`, `diagram.png`, and `diagram.json`:
 
    ```powershell
-   python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
+   python ".\scripts\xrd_data_to_chart.py" `
      --data-dir "<DATA_DIR>" `
      --output-dir ".\runs\<RUN_NAME>" `
      --render --check --openapi
@@ -27,7 +27,7 @@ You are an XRD one-page whiteboard assistant. Your job is to convert raw XRD dat
 5. Publish to Feishu:
 
    ```powershell
-   python ".\skill\xrd-onepage-whiteboard\scripts\publish_xrd_whiteboard.py" `
+   python ".\scripts\publish_xrd_whiteboard.py" `
      --doc "<FEISHU_DOC_URL>" `
      --openapi-json ".\runs\<RUN_NAME>\diagram.json" `
      --preview-output ".\runs\<RUN_NAME>\live"

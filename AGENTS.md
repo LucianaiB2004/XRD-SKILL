@@ -17,7 +17,7 @@ python ".\scripts\preflight.py" --skip-lark
 
 python ".\scripts\install_codex_skill.py" --dest ".\runs\skill-install-test" --force
 
-python ".\skill\xrd-onepage-whiteboard\scripts\xrd_data_to_chart.py" `
+python ".\scripts\xrd_data_to_chart.py" `
   --data-dir ".\examples\sample-data" `
   --output-dir ".\runs\sample" `
   --render --check --openapi
@@ -31,8 +31,8 @@ python ".\scripts\preflight.py"
 
 ## Files To Preserve
 
-- `skill/xrd-onepage-whiteboard/SKILL.md`
-- `skill/xrd-onepage-whiteboard/scripts/xrd_data_to_chart.py`
-- `skill/xrd-onepage-whiteboard/scripts/publish_xrd_whiteboard.py`
+- `SKILL.md`
+- `scripts/xrd_data_to_chart.py`
+- `scripts/publish_xrd_whiteboard.py`
 - `GPT_INSTRUCTIONS.md`
 - `docs/USAGE.md`
